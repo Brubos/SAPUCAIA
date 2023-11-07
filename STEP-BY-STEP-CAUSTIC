@@ -1,0 +1,10 @@
+STEP BY STEP TO OBTAIN THE SAPUCAIA CAUSTIC
+
+Run SPU_8007eV_PAPU_h13.ows
+Generate a .h5 file with the widget caustic
+Change the name of this .h5 file
+
+Run "Read_caustic" - remember to change the .h5 file name in the data
+It will generate two files .txt with FWHM and FWTM
+
+Run "Plot_caustic" 
