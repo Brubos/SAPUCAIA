@@ -372,8 +372,7 @@ for misalig in misalig_array:
  
     #%% Read Shadow beam
     beam2D = read_shadow_beam(beam_copy, x_column_index=3, y_column_index=1, nbins_x=nbins_x, nbins_y=nbins_y, nolost=1, ref=23, zeroPadding=2, gaussian_filter=0)
-        
-    
+         
     #%% Adjustable the scale and plotting
     
     #%% Rotations
@@ -414,7 +413,7 @@ for misalig in misalig_array:
         if unit =='mm': filename = "SPU "+ device + ' ' + deg_f +"=%.1fmm"%(misalig)
         if unit =='µm': filename = 'SPU '+ device + ' ' + deg_f +'=%.0fµm'%(misalig)
         
-        #%% Plot Beam
+    #%% Plot Beam
     outputs = plot_beam(beam2D, show_plot=True,outfilename=filename+'.png',outfileext='png',cut=0,textA=1,textB=5,textC=2,fitType=3,cmap='viridis',plot_title=filename,
                         zero_pad_x=zero_pad_x, zero_pad_y=zero_pad_y,
                         x_range = plot_range_x, y_range = plot_range_y,
