@@ -378,7 +378,7 @@ for misalig in misalig_array:
     
     #%% Rotations
     if deg_f == 'Rx': 
-        plot_range_x, plot_range_y = 600, 600      # the total range of the plot in [µm]    
+        plot_range_x, plot_range_y = 800, 800      # the total range of the plot in [µm]    
         zero_pad_x, zero_pad_y = 2, 2              # the zeros      
         
     if deg_f == 'Ry': 
