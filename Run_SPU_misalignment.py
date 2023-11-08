@@ -16,7 +16,7 @@ Created on Thu Oct  5 14:41:02 2023
 import numpy as np                                                           # Scientific computing library 
 import Shadow                                                                # Used for shadow simulations
 from optlnls.importing import read_shadow_beam                               # Used for read the shadow beam
-from plot_beam_modified import plot_beam                                     # Plot the beam information
+from Plot_beam_modified import plot_beam                                     # Plot the beam information
 from optlnls.shadow import run_shadow_caustic, read_caustic,get_good_ranges  # Custom functions related to Shadow software
 import matplotlib.pyplot as plt                                              # Library for creating charts and plots 
 import pandas as pd                                                          # Library for data manipulation and analysis
@@ -86,7 +86,8 @@ oe4 = Shadow.OE()
 #
 
 oe0.FDISTR = 3
-oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'
+oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
+# oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'             # Home
 oe0.F_BOUND_SOUR = 2
 oe0.F_PHOT = 0
 oe0.HDIV1 = 0.0
@@ -121,7 +122,8 @@ oe1.T_REFLECTION = 180.0
 oe1.T_SOURCE = 20750.0
 
 oe2.DUMMY = 0.1
-oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'
+oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
+# oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe2.FWRITE = 1
 oe2.F_CENTRAL = 1
 oe2.F_CRYSTAL = 1
@@ -134,7 +136,8 @@ oe2.T_SOURCE = 8250.0
 
 oe3.ALPHA = 180.0
 oe3.DUMMY = 0.1
-oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'
+oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
+#oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe3.FWRITE = 1
 oe3.F_CENTRAL = 1
 oe3.F_CRYSTAL = 1
@@ -273,9 +276,11 @@ for misalig in misalig_array:
     #
     oe4.ALPHA = 90.0
     oe4.DUMMY = 0.1
-    oe4.FHIT_C = 1
-    oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'
-    oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'
+    oe4.FHIT_C = 1 
+    oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
+    oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
+    # oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
+    # oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
     oe4.FMIRR = 3
     oe4.FWRITE = 1
     oe4.F_DEFAULT = 0
