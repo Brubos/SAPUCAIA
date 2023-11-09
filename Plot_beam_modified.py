@@ -359,7 +359,7 @@ def plot_beam(beam2D, show_plot=True, outfilename='', outfileext='png', cut=0, t
     rect_2D = [LTborder + X_or_Y + space, RBborder, width_main, width_main] #2D
     rect_X =  [LTborder + X_or_Y + space, RBborder + width_main + space, width_main, X_or_Y]
     rect_Y =  [LTborder, RBborder, X_or_Y, width_main]
-    rect_T =  [LTborder, RBborder + width_main + space, X_or_Y, X_or_Y] #Text box
+    rect_T =  [LTborder, RBborder + width_main + space, X_or_Y+0.02, X_or_Y] #Text box
     
     #Criação dos quatro eixos
     ax2D = figure.add_axes(rect_2D)
