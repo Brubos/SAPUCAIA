@@ -23,24 +23,24 @@ import pandas as pd                                                          # L
 n_rays= 1000000                            # number of rays used in the simulation
 deg_f='Ry'                                 # the degree of freedom in Sirius frame;
 unit ='µrad'                               # µrad, mrad for rotations; [µm], [mm] for translations
-misalig_array=np.linspace(-10,10,3)        # misalignment array;
+misalig_array=[10]#np.linspace(-10,10,3)        # misalignment array;
 
-position = 0                           # Position of interest
+position = 16970                           # Position of interest
 
 # caustic parameters
 z0 = 0           # starting z
 zf = 30000       # final z
-nz = 101          # number of points
+nz = 11          # number of points
 
 
 # Define a dictionary to map positions to devices
 position_to_device = {
-    0:     "M1",
-    841:   'DVF3',
-    13750: 'DVF4',
-    16970: 'SMP',
-    22000: 'Hor_f',
-    25000: 'Ver_f'    }
+    0     : 'M1',
+    841   : 'DVF3',
+    13750 : 'DVF4',
+    16970 : 'SMP',
+    22000 : 'Hor_f',
+    25000 : 'Ver_f'    }
 
 # Set the default values for nbins_x and nbins_y
 nbins_x = 200
@@ -92,8 +92,8 @@ oe4 = Shadow.OE()
 #
 
 oe0.FDISTR = 3
-# oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
-oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'             # Home
+oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
+# oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'             # Home
 oe0.F_BOUND_SOUR = 2
 oe0.F_PHOT = 0
 oe0.HDIV1 = 0.0
@@ -128,8 +128,8 @@ oe1.T_REFLECTION = 180.0
 oe1.T_SOURCE = 20750.0
 
 oe2.DUMMY = 0.1
-# oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
-oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
+# oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe2.FWRITE = 1
 oe2.F_CENTRAL = 1
 oe2.F_CRYSTAL = 1
@@ -142,8 +142,8 @@ oe2.T_SOURCE = 8250.0
 
 oe3.ALPHA = 180.0
 oe3.DUMMY = 0.1
-# oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
-oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
+# oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe3.FWRITE = 1
 oe3.F_CENTRAL = 1
 oe3.F_CRYSTAL = 1
@@ -283,10 +283,10 @@ for misalig in misalig_array:
     oe4.ALPHA = 90.0
     oe4.DUMMY = 0.1
     oe4.FHIT_C = 1 
-    # oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
-    # oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
-    oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
-    oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
+    oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
+    oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
+    # oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
+    # oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
     oe4.FMIRR = 3
     oe4.FWRITE = 1
     oe4.F_DEFAULT = 0
@@ -486,8 +486,8 @@ for misalig in misalig_array:
     data['fwhm_v_sli'].append(outputs['fwhm_z'])
     data['mean_pos_h'].append(outputs['mean_x'])
     data['mean_pos_v'].append(outputs['mean_z'])
-    data['z_fwhm_min_h'].append(caustic_dict['z_fwhm_min_h']+0)   # sum 31000 due position of the mirror
-    data['z_fwhm_min_v'].append(caustic_dict['z_fwhm_min_v']+0)   # sum 31000 due position of the mirror
+    data['z_fwhm_min_h'].append(caustic_dict['z_fwhm_min_h']+31000)   # sum 31000 due position of the mirror
+    data['z_fwhm_min_v'].append(caustic_dict['z_fwhm_min_v']+31000)   # sum 31000 due position of the mirror
     data['z_rms_min_h'].append(caustic_dict['center_rms_h'])
     data['z_rms_min_v'].append(caustic_dict['center_rms_v'])   
          
@@ -645,7 +645,7 @@ def format_center_align_header(value):
 formatted_headers = [format_center_align_header(header) for header in header_list]
 
 # Create a DataFrame with the formatted headers
-data = pd.DataFrame({
+data2 = pd.DataFrame({
     formatted_headers[0]: data['misalignment'],
     formatted_headers[1]: data['z_fwhm_min_h'],
     formatted_headers[2]: data['z_fwhm_min_v'],
@@ -661,11 +661,11 @@ def format_center_align_data(value):
     return f'{value:^20}'  # You can adjust the width as needed
 
 # Apply the formatting function to each data column
-for column in data.columns:
-    data[column] = data[column].apply(format_center_align_data)
+for column in data2.columns:
+    data2[column] = data2[column].apply(format_center_align_data)
 
 # Save the DataFrame to a .txt file with a tab separator
-data.to_csv(file_name, sep='\t', index=False, header=False)
+data2.to_csv(file_name, sep='\t', index=False, header=False)
 
 # Save the header separately
 with open(file_name, 'r') as f:
