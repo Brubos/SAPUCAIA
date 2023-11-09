@@ -23,11 +23,11 @@ import pandas as pd                                                          # L
 
 #%% PARAMETERS:
 n_rays= 1000000                            # number of rays used in the simulation
-deg_f='Rx'                                 # the degree of freedom in Sirius frame;
+deg_f='Ry'                                 # the degree of freedom in Sirius frame;
 unit ='µrad'                               # µrad, mrad for rotations; [µm], [mm] for translations
-misalig_array=np.linspace(-450,450,11)      # misalignment array;
+misalig_array=[54] #np.linspace(-90,90,11)      # misalignment array;
 
-position = 13750                           # Position of interest
+position = 16970                           # Position of interest
 
 # Define a dictionary to map positions to devices
 position_to_device = {
@@ -86,8 +86,8 @@ oe4 = Shadow.OE()
 #
 
 oe0.FDISTR = 3
-# oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
-oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'                 # Home
+oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
+# oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'                 # Home
 oe0.F_BOUND_SOUR = 2
 oe0.F_PHOT = 0
 oe0.HDIV1 = 0.0
@@ -122,8 +122,8 @@ oe1.T_REFLECTION = 180.0
 oe1.T_SOURCE = 20750.0
 
 oe2.DUMMY = 0.1
-# oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
-oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
+# oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe2.FWRITE = 1
 oe2.F_CENTRAL = 1
 oe2.F_CRYSTAL = 1
@@ -136,8 +136,8 @@ oe2.T_SOURCE = 8250.0
 
 oe3.ALPHA = 180.0
 oe3.DUMMY = 0.1
-# oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
-oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
+# oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe3.FWRITE = 1
 oe3.F_CENTRAL = 1
 oe3.F_CRYSTAL = 1
@@ -277,10 +277,10 @@ for misalig in misalig_array:
     oe4.ALPHA = 90.0
     oe4.DUMMY = 0.1
     oe4.FHIT_C = 1 
-    # oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
-    # oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
-    oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
-    oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
+    oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
+    oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
+    # oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
+    # oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
     oe4.FMIRR = 3
     oe4.FWRITE = 1
     oe4.F_DEFAULT = 0
@@ -377,12 +377,12 @@ for misalig in misalig_array:
     
     #%% Rotations
     if deg_f == 'Rx': 
-        plot_range_x, plot_range_y = 800, 800      # the total range of the plot in [µm]    
-        zero_pad_x, zero_pad_y = 2, 2              # the zeros      
+        plot_range_x, plot_range_y = 400, 400      # the total range of the plot in [µm]    
+        zero_pad_x, zero_pad_y = 4, 4              # the zeros      
         
     if deg_f == 'Ry': 
-        plot_range_x, plot_range_y = 6000, 6000    # the total range of the plot in [µm] 
-        zero_pad_x, zero_pad_y = 8, 4              # the zeros      
+        plot_range_x, plot_range_y = 7000, 7000    # the total range of the plot in [µm] 
+        zero_pad_x, zero_pad_y = 12, 6              # the zeros      
         
     if deg_f == 'Rz': 
         plot_range_x, plot_range_y = 10400, 10400  #  the total range of the plot in [µm]   
