@@ -23,11 +23,11 @@ import pandas as pd                                                          # L
 
 #%% PARAMETERS:
 n_rays= 1000000                            # number of rays used in the simulation
-deg_f='Ry'                                 # the degree of freedom in Sirius frame;
-unit ='µrad'                               # µrad, mrad for rotations; [µm], [mm] for translations
-misalig_array=[54] #np.linspace(-90,90,11)      # misalignment array;
+deg_f='Ty'                                 # the degree of freedom in Sirius frame;
+unit ='mm'                               # µrad, mrad for rotations; [µm], [mm] for translations
+misalig_array=np.linspace(-2,2,11)      # misalignment array;
 
-position = 16970                           # Position of interest
+position = 25000                           # Position of interest
 
 # Define a dictionary to map positions to devices
 position_to_device = {
@@ -86,8 +86,8 @@ oe4 = Shadow.OE()
 #
 
 oe0.FDISTR = 3
-oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
-# oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'                 # Home
+# oe0.FILE_BOUND = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'  # CNPEM
+oe0.FILE_BOUND = b'/home/bruno/GITHUB/SAPUCAIA/SPU_optimize_source_66x66urad2.txt'                 # Home
 oe0.F_BOUND_SOUR = 2
 oe0.F_PHOT = 0
 oe0.HDIV1 = 0.0
@@ -122,8 +122,8 @@ oe1.T_REFLECTION = 180.0
 oe1.T_SOURCE = 20750.0
 
 oe2.DUMMY = 0.1
-oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
-# oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+# oe2.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'   # CNPEM
+oe2.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe2.FWRITE = 1
 oe2.F_CENTRAL = 1
 oe2.F_CRYSTAL = 1
@@ -136,8 +136,8 @@ oe2.T_SOURCE = 8250.0
 
 oe3.ALPHA = 180.0
 oe3.DUMMY = 0.1
-oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
-# oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
+# oe3.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Si111.dat'  # CNPEM
+oe3.FILE_REFL = b'/home/bruno/Oasys/Si111.dat'              # HOME
 oe3.FWRITE = 1
 oe3.F_CENTRAL = 1
 oe3.F_CRYSTAL = 1
@@ -277,10 +277,10 @@ for misalig in misalig_array:
     oe4.ALPHA = 90.0
     oe4.DUMMY = 0.1
     oe4.FHIT_C = 1 
-    oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
-    oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
-    # oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
-    # oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
+    # oe4.FILE_REFL = b'/home/ABTLUS/bruno.souza/Oasys/Rh.dat'                                          # CNPEM
+    # oe4.FILE_RIP = b'/home/ABTLUS/bruno.souza/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # CNPEM
+    oe4.FILE_REFL = b'/home/bruno/Oasys/Rh.dat'                                          # HOME
+    oe4.FILE_RIP = b'/home/bruno/GITHUB/SAPUCAIA/SPU_total_deformation_300mm_sh.dat'     # HOME
     oe4.FMIRR = 3
     oe4.FWRITE = 1
     oe4.F_DEFAULT = 0
@@ -346,7 +346,7 @@ for misalig in misalig_array:
         setattr(oe4, translation_variable, value)
   
     print("####################################################################") 
-    print(oe4.Z_ROT)
+    print(oe4.OFFX)
     print("####################################################################") 
 
     #
@@ -375,27 +375,27 @@ for misalig in misalig_array:
          
     #%% Adjustable the scale and plotting
     
-    #%% Rotations
+    # Rotations
     if deg_f == 'Rx': 
         plot_range_x, plot_range_y = 400, 400      # the total range of the plot in [µm]    
         zero_pad_x, zero_pad_y = 4, 4              # the zeros      
         
     if deg_f == 'Ry': 
-        plot_range_x, plot_range_y = 7000, 7000    # the total range of the plot in [µm] 
-        zero_pad_x, zero_pad_y = 12, 6              # the zeros      
+        plot_range_x, plot_range_y = 20000, 20000    # the total range of the plot in [µm] 
+        zero_pad_x, zero_pad_y = 20, 22              # the zeros      
         
     if deg_f == 'Rz': 
         plot_range_x, plot_range_y = 10400, 10400  #  the total range of the plot in [µm]   
         zero_pad_x, zero_pad_y = 25, 25            # the zeros
         
-    #%% Translations    
+    # Translations    
     if deg_f == 'Tx': 
-        plot_range_x, plot_range_y = 450, 450      # the total range of the plot in [µm]    
-        zero_pad_x, zero_pad_y = 2, 2              # the zeros      
+        plot_range_x, plot_range_y = 400, 400      # the total range of the plot in [µm]    
+        zero_pad_x, zero_pad_y = 2, 6              # the zeros      
         
     if deg_f == 'Ty': 
-        plot_range_x, plot_range_y = 9000, 9000    # the total range of the plot in [µm] 
-        zero_pad_x, zero_pad_y = 10, 40              # the zeros      
+        plot_range_x, plot_range_y = 6800, 6800    # the total range of the plot in [µm] 
+        zero_pad_x, zero_pad_y = 8, 26              # the zeros      
         
     if deg_f == 'Tz': 
         plot_range_x, plot_range_y = 460, 460  # the total range of the plot in [µm]   
@@ -405,13 +405,13 @@ for misalig in misalig_array:
     
     # Rotations
     if deg_f in ['Rx','Ry','Rz']: 
-        if unit =='µrad': filename = 'SPU '+ device + ' ' + deg_f +'=%.0fµrad'%(misalig)
-        if unit =='mrad': filename = 'SPU '+ device + ' ' + deg_f +'=%.0fmrad'%(misalig)
+        if unit =='µrad': filename = 'SPU '+ device + ' ' + deg_f +'=%.0f µrad'%(misalig)
+        if unit =='mrad': filename = 'SPU '+ device + ' ' + deg_f +'=%.0f mrad'%(misalig)
         
     # Translations
     if deg_f in ['Tx','Ty','Tz']:
-        if unit =='mm': filename = "SPU "+ device + ' ' + deg_f +"=%.1fmm"%(misalig)
-        if unit =='µm': filename = 'SPU '+ device + ' ' + deg_f +'=%.0fµm'%(misalig)
+        if unit =='mm': filename = "SPU "+ device + ' ' + deg_f +"=%.1f mm"%(misalig)
+        if unit =='µm': filename = 'SPU '+ device + ' ' + deg_f +'=%.0f µm'%(misalig)
         
     #%% Plot Beam
     outputs = plot_beam(beam2D, show_plot=True,outfilename=filename+'.png',outfileext='png',cut=0,textA=1,textB=5,textC=2,fitType=3,cmap='viridis',plot_title=filename,
