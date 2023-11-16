@@ -18,7 +18,7 @@ gamma_list = []                          # Parameter for calculating the meridio
 beta_list = []                           # Parameter for calculating the sagittal radius   [adim]
 qm_list = []                             # q meridional list [m]
 qs_list = []                             # q sagittal list   [m]
-pitch = np.linspace(2.5, 4.5, 21)        # Mirror angle [mrad]
+pitch = np.linspace(3.4, 3.6, 21)        # Mirror angle [mrad]
 delta_pitch = np.linspace(-1, 1, 21)     # Variation of mirror angle [mrad]
 
 
@@ -48,34 +48,30 @@ def qs(betta_list,p):
         qs_list.append(qs+p)
     return qs_list
 
+import matplotlib.pyplot as plt
 
 def plot_graphs(delta_qm, delta_qs, pitch):
-    # Plotting delta_qm as a function of pitch
-    plt.figure(figsize=(12, 5))
+    # Plotting delta_qm and delta_qs in the same plot
+    plt.figure(figsize=(8, 5))
 
-    plt.subplot(1, 2, 1)
-    plt.plot(pitch, delta_qm, marker='o', linestyle='-', color='b')
-    plt.title(r'$q_m = \frac{\gamma p}{(1-\gamma)}$' +r'        '+ r'$\gamma = \frac{R_m \theta}{2p}$', pad=20, fontsize=18)
+    plt.plot(pitch, delta_qm, marker='o', linestyle='-', color='#455BA6', label=r'$q_m = \frac{\gamma p}{(1-\gamma)}$' +r'        '+ r'$\gamma = \frac{R_m \theta}{2p}$')
+    plt.plot(pitch, delta_qs, marker='o', linestyle='-', color='#A8D83D', label=r'$q_s = \frac{\beta p}{(1-\beta)}$' +r'        '+ r'$\beta = \frac{R_s}{2\theta p}$')
+
+    plt.title('Variação da posição focal em função de Ry (pitch)', fontsize=18)
+#plt.title('Meridional and Sagittal Components', fontsize=18)
     plt.xlabel('ΔPitch [mrad]')
-    plt.ylabel('Δq Meridional')
-    plt.grid(True)
+    plt.ylabel('Δq [m]')
+    plt.grid(False)
+    
+    # Adding a legend with increased font size and placing it in the center
+    plt.legend(fontsize='large', loc='upper center',framealpha=0.1)
 
-    # Plotting delta_qs as a function of pitch
-    plt.subplot(1, 2, 2)
-    plt.plot(pitch, delta_qs, marker='o', linestyle='-', color='r')
-    plt.title(r'$q_s = \frac{\beta p}{(1-\beta)}$' +r'        '+ r'$\beta = \frac{R_s}{2\theta p}$', pad=20, fontsize=18)
-    plt.xlabel('ΔPitch [mrad]')
-    plt.ylabel('Δq Sagittal')
-    plt.grid(True)
+    # Saving the plot with high quality
+    plt.savefig('Δqm_Δqs_pitch', dpi=2000,transparent=True)
 
-    # Adjusting the layout to avoid label overlap
-    plt.tight_layout()
-
-    # Saving the plots with high quality
-    plt.savefig('Δqm_Δqs_pitch', dpi=1000)
-
-    # Displaying the plots
+    # Displaying the plot
     plt.show()
+
 
 #%% Calculating
 
