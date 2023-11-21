@@ -307,7 +307,7 @@ def read_caustic(filename, write_attributes=False, plot=False, plot2D=False,
 
 #%% Data: 
     
-filename = 'SPU_8007eV_PAPU_001.h5'
+filename = 'SPU_8007eV_PAPU.h5'
 d = 31000   # distance from source
 
 histoH, histoV, outdict = read_caustic(filename, write_attributes=False, plot=False, plot2D=False, print_minimum=False, cmap='viridis', figprefix='')
@@ -411,9 +411,12 @@ if(plot_FWHM):
     plt.subplots_adjust(0.15, 0.15, 0.95, 0.95)
     plt.scatter(z_array/1000, fwhm_h_fit_list, color='C0', alpha=0.8, label='Shadow')
     plt.plot(z_new/1000, fwhm_h_new, '--', color='black', alpha=0.8, label=legend_fwhm) #label='Fit'
-    plt.title('Horizontal Caustic')
-    plt.ylabel('Beam Size FWHM [$\mu$m]')
-    plt.xlabel('Distance [m]')
+    # plt.title('Horizontal Caustic')
+    # plt.ylabel('Beam Size FWHM [$\mu$m]')
+    # plt.xlabel('Distance [m]')
+    plt.title('Cáustica Horizontal')
+    plt.ylabel('Tamanho do feixe FWHM [$\mu$m]')
+    plt.xlabel('Distância [m]')
     plt.xlim(30, 60)
     plt.ylim(80, 480)
     plt.minorticks_on()
@@ -430,9 +433,12 @@ if(plot_FWHM):
     plt.subplots_adjust(0.15, 0.15, 0.95, 0.95)
     plt.scatter(z_array/1000, fwhm_v_fit_list, color='C0', alpha=0.8, label='Shadow')
     plt.plot(z_new/1000, fwhm_v_new, '--', color='black', alpha=0.8, label=legend_fwhm) #label='Fit'
-    plt.title('Vertical Caustic')
-    plt.ylabel('Beam Size FWHM [$\mu$m]')
-    plt.xlabel('Distance [m]')
+    # plt.title('Vertical Caustic')
+    # plt.ylabel('Beam Size FWHM [$\mu$m]')
+    # plt.xlabel('Distance [m]')
+    plt.title('Cáustica Vertical')
+    plt.ylabel('Tamanho do feixe FWHM [$\mu$m]')
+    plt.xlabel('Distância [m]')
     plt.xlim(30, 60)
     plt.ylim(-20, 680)
     plt.minorticks_on()
@@ -455,9 +461,12 @@ if(plot_FWTM):
     plt.subplots_adjust(0.15, 0.15, 0.95, 0.95)
     plt.scatter(z_array/1000, fwtm_h_fit_list, color='C0', alpha=0.8, label='Shadow')
     plt.plot(z_new/1000, fwtm_h_new, '--', color='black', alpha=0.8, label=legend_fwtm) #label='Fit'
-    plt.title('Horizontal Caustic')
-    plt.ylabel('Beam Size FWTM [$\mu$m]')
-    plt.xlabel('Distance [m]')
+    # plt.title('Horizontal Caustic')
+    # plt.ylabel('Beam Size FWTM [$\mu$m]')
+    # plt.xlabel('Distance [m]')
+    plt.title('Cáustica Horizontal')
+    plt.ylabel('Tamanho do feixe FWTM [$\mu$m]')
+    plt.xlabel('Distância [m]')
     plt.xlim(30, 60)
     plt.ylim(150, 900)
     plt.minorticks_on()
@@ -474,9 +483,12 @@ if(plot_FWTM):
     plt.subplots_adjust(0.15, 0.15, 0.95, 0.95)
     plt.scatter(z_array/1000, fwtm_v_fit_list, color='C0', alpha=0.8, label='Shadow')
     plt.plot(z_new/1000, fwtm_v_new, '--', color='black', alpha=0.8, label=legend_fwtm) #label='Fit'
-    plt.title('Vertical Caustic')
-    plt.ylabel('Beam Size FWTM [$\mu$m]')
-    plt.xlabel('Distance [m]')
+    # plt.title('Vertical Caustic')
+    # plt.ylabel('Beam Size FWTM [$\mu$m]')
+    # plt.xlabel('Distance [m]')
+    plt.title('Cáustica Vertical')
+    plt.ylabel('Tamanho do feixe FWTM [$\mu$m]')
+    plt.xlabel('Distância [m]')
     plt.xlim(30, 60)
     plt.ylim(-50, 1100)
     plt.minorticks_on()
