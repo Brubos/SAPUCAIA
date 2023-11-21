@@ -286,7 +286,7 @@ def read_caustic(filename, write_attributes=False, plot=False, plot2D=False,
    
 d=31000  #distance of the mirror    
    
-filename = 'SPU_8007eV_PAPU_002.h5'
+filename = 'SPU_8007eV_PAPU.h5'
 
 histo, histoV, outdict = read_caustic(filename, write_attributes=False, plot=False, plot2D=False, print_minimum=False, cmap='viridis', figprefix='')
 
@@ -383,17 +383,22 @@ z_new, fwtm_v_new, popt_fwtm_v = fit_gaussian_beam(z, fwtm_y, auto_guess=True)
 
 ## Horizontal:
     
-fs = 11
+fs = 12
 lw = 2
+
+v=10
+h=9
 
 savefig = True
 
 legend_fwhm = r'$FWHM_0 \sqrt{1+\left(\frac{z-z_0}{\beta}\right)^2}$'
 legend_fwtm = r'$FWTM_0 \sqrt{1+\left(\frac{z-z_0}{\beta}\right)^2}$'
 
-fig = plt.figure(figsize=(10,9))
+# fig = plt.figure(figsize=(10,9))
+fig = plt.figure(figsize=(v,h))
+
 ax1 = plt.subplot(211)
-ax2 = plt.subplot(212, sharex = ax1)
+# ax2 = plt.subplot(212, sharex = ax1)
 
 
 
@@ -403,28 +408,35 @@ ax1.plot(z_new/1000, fwhm_h_new/2, '--', color='white', alpha=1.0, linewidth=lw)
 ax1.plot(z_new/1000, -1*fwtm_h_new/2, '--', color='wheat', alpha=1.0, linewidth=lw, label='FWTM')
 ax1.plot(z_new/1000, fwtm_h_new/2, '--', color='wheat', alpha=1.0, linewidth=lw)
 # Plot D.O.F (Depth of Focus)
-ax1.axvline(x=dof0_h/1000, color='red',alpha=0.5, linestyle='--',label="Depth of focus")
+#ax1.axvline(x=dof0_h/1000, color='red',alpha=0.5, linestyle='--',label="Depth of focus")
+ax1.axvline(x=dof0_h/1000, color='red',alpha=0.5, linestyle='--',label="Profundidade de foco")
 ax1.axvline(x=dof1_h/1000, color='red',alpha=0.5, linestyle='--')
 
-ax2.plot(z_new/1000, fwhm_h_new, '-', color='C0', alpha=1.0, label=legend_fwhm) #label='Fit'
-ax2.plot(z_new/1000, fwtm_h_new, '-', color='C1', alpha=1.0, label=legend_fwtm) #label='Fit' 
+# ax2.plot(z_new/1000, fwhm_h_new, '-', color='C0', alpha=1.0, label=legend_fwhm) #label='Fit'
+# ax2.plot(z_new/1000, fwtm_h_new, '-', color='C1', alpha=1.0, label=legend_fwtm) #label='Fit' 
 
 
-plt.text(0.8, 0.55, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwhm_h[1]/1000))+'\n'+r'$FWHM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwhm_h[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwhm_h[2]/1000)), 
-          horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C0', transform=plt.gca().transAxes)  
+# plt.text(0.8, 0.55, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwhm_h[1]/1000))+'\n'+r'$FWHM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwhm_h[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwhm_h[2]/1000)), 
+#           horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C0', transform=plt.gca().transAxes)  
 
-plt.text(0.8, 0.35, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwtm_h[1]/1000))+'\n'+r'$FWTM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwtm_h[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwtm_h[2]/1000)), 
-          horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C1', transform=plt.gca().transAxes)  
+# plt.text(0.8, 0.35, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwtm_h[1]/1000))+'\n'+r'$FWTM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwtm_h[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwtm_h[2]/1000)), 
+#           horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C1', transform=plt.gca().transAxes)  
 
 ax1.legend()
-ax2.legend()
+# ax2.legend()
 
-ax1.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
-ax2.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+# ax1.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+# ax2.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+ax1.set_ylabel('Tamanho do feixe [$\mu$m]', fontsize=fs)
+# ax2.set_ylabel('Tamanho do feixe [$\mu$m]', fontsize=fs)
 
-ax2.set_xlabel('Distance [m]', fontsize=fs) 
+# ax2.set_xlabel('Distance [m]', fontsize=fs) 
 
-ax1.set_title('Horizontal Caustic', fontsize=fs+2) 
+# ax1.set_title('Horizontal Caustic', fontsize=fs+2) 
+ax1.set_xlabel('Distância [m]', fontsize=fs) 
+# ax2.set_xlabel('Distância [m]', fontsize=fs) 
+
+ax1.set_title('Cáustica Horizontal', fontsize=fs+2) 
 
 ax1.set_xlim(31, 61)
 ax1.set_ylim(-900, 900)
@@ -433,22 +445,22 @@ ax1.tick_params(which='both', axis='both', direction='out', right=False, top=Fal
 ax1.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
 ax1.grid(which='both', alpha=0.2)
 
-ax2.set_xlim(31, 61)
-ax2.set_ylim(0, 1600)
-ax2.minorticks_on()
-ax2.tick_params(which='both', axis='both', direction='out', right=False, top=False, labelsize=fs)
-ax2.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
-ax2.grid(which='both', alpha=0.2)
+# ax2.set_xlim(31, 61)
+# ax2.set_ylim(0, 1600)
+# ax2.minorticks_on()
+# ax2.tick_params(which='both', axis='both', direction='out', right=False, top=False, labelsize=fs)
+# ax2.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
+# ax2.grid(which='both', alpha=0.2)
 
 plt.tight_layout()
-if(savefig): plt.savefig('Horizontal_caustic_31-61m_PAPU.png', dpi=500)
+if(savefig): plt.savefig('Horizontal_caustic_31-61m_PAPU.png', dpi=1800)
 
 
 ## Vertical:
 
-fig = plt.figure(figsize=(10,9))
+fig = plt.figure(figsize=(v,h))
 ax1 = plt.subplot(211)
-ax2 = plt.subplot(212, sharex = ax1)
+# ax2 = plt.subplot(212, sharex = ax1)
 
 ax1.imshow(histoV, origin='lower', extent=(z[0]/1000, z[-1]/1000, -900, 900), interpolation = 'sinc', vmin=0, vmax=np.max(histoV), aspect='auto')
     
@@ -457,28 +469,35 @@ ax1.plot(z_new/1000, fwhm_v_new/2, '--', color='white', alpha=1.0, linewidth=lw)
 ax1.plot(z_new/1000, -1*fwtm_v_new/2, '--', color='wheat', alpha=1.0, linewidth=lw, label='FWTM')
 ax1.plot(z_new/1000, fwtm_v_new/2, '--', color='wheat', alpha=1.0, linewidth=lw)
 # Plot D.O.F (Depth of Focus)
-ax1.axvline(x=dof0_v/1000, color='red',alpha=0.5, linestyle='--',label="Depth of focus")
+# ax1.axvline(x=dof0_v/1000, color='red',alpha=0.5, linestyle='--',label="Depth of focus")
+ax1.axvline(x=dof0_v/1000, color='red',alpha=0.5, linestyle='--',label="Profundidade de foco")
 ax1.axvline(x=dof1_v/1000, color='red',alpha=0.5, linestyle='--')
 
-ax2.plot(z_new/1000, fwhm_v_new, '-', color='C0', alpha=1.0, label=legend_fwhm) #label='Fit'
-ax2.plot(z_new/1000, fwtm_v_new, '-', color='C1', alpha=1.0, label=legend_fwtm) #label='Fit' 
+# ax2.plot(z_new/1000, fwhm_v_new, '-', color='C0', alpha=1.0, label=legend_fwhm) #label='Fit'
+# ax2.plot(z_new/1000, fwtm_v_new, '-', color='C1', alpha=1.0, label=legend_fwtm) #label='Fit' 
 
 
-plt.text(0.8, 0.55, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwhm_v[1]/1000))+'\n'+r'$FWHM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwhm_v[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwhm_v[2]/1000)), 
-          horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C0', transform=plt.gca().transAxes)  # 0.04, 0.05
+# plt.text(0.8, 0.55, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwhm_v[1]/1000))+'\n'+r'$FWHM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwhm_v[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwhm_v[2]/1000)), 
+#           horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C0', transform=plt.gca().transAxes)  # 0.04, 0.05
 
-plt.text(0.8, 0.35, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwtm_v[1]/1000))+'\n'+r'$FWTM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwtm_v[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwtm_v[2]/1000)), 
-          horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C1', transform=plt.gca().transAxes)  # 0.04, 0.05
+# plt.text(0.8, 0.35, r'$z_0 = {0:.1f} \ m$'.format(np.abs(popt_fwtm_v[1]/1000))+'\n'+r'$FWTM_0 = {0:.1f} \ \mu m$'.format(np.abs(popt_fwtm_v[0]))+'\n'+r'$\beta = {0:.2f} \ m$'.format(np.abs(popt_fwtm_v[2]/1000)), 
+#           horizontalalignment='left', verticalalignment='bottom', fontsize = 10.0, color='C1', transform=plt.gca().transAxes)  # 0.04, 0.05
 
 ax1.legend()
-ax2.legend()
+# ax2.legend()
 
-ax1.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
-ax2.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+# ax1.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+# ax2.set_ylabel('Beam Size [$\mu$m]', fontsize=fs)
+ax1.set_ylabel('Tamanho do feixe [$\mu$m]', fontsize=fs)
+# ax2.set_ylabel('Tamanho do feixe [$\mu$m]', fontsize=fs)
 
-ax2.set_xlabel('Distance [m]', fontsize=fs) 
+# ax2.set_xlabel('Distance [m]', fontsize=fs) 
 
-ax1.set_title('Vertical Caustic', fontsize=fs+2) 
+# ax1.set_title('Vertical Caustic', fontsize=fs+2) 
+ax1.set_xlabel('Distância [m]', fontsize=fs) 
+# ax2.set_xlabel('Distância [m]', fontsize=fs) 
+
+ax1.set_title('Cáustica Vertical', fontsize=fs+2) 
 
 ax1.set_xlim(31, 61)
 ax1.set_ylim(-550, 550)
@@ -487,15 +506,12 @@ ax1.tick_params(which='both', axis='both', direction='out', right=False, top=Fal
 ax1.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
 ax1.grid(which='both', alpha=0.2)
 
-
-
-
-ax2.set_xlim(31, 61)
-ax2.set_ylim(0, 1600)
-ax2.minorticks_on()
-ax2.tick_params(which='both', axis='both', direction='out', right=False, top=False, labelsize=fs)
-ax2.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
-ax2.grid(which='both', alpha=0.2)
+# ax2.set_xlim(31, 61)
+# ax2.set_ylim(0, 1600)
+# ax2.minorticks_on()
+# ax2.tick_params(which='both', axis='both', direction='out', right=False, top=False, labelsize=fs)
+# ax2.set_xticks(np.linspace(31,61, round((61-31)/1+1)))
+# ax2.grid(which='both', alpha=0.2)
 
 plt.tight_layout()
-if(savefig): plt.savefig('Vertical_caustic_31-61m_PAPU.png', dpi=500)   
+if(savefig): plt.savefig('Vertical_caustic_31-61m_PAPU.png', dpi=1800)   
