@@ -342,7 +342,7 @@ def plot_beam(beam2D, show_plot=True, outfilename='', outfileext='png', cut=0, t
     
         
     ### CREATE PLOT CANVAS
-    figure = plt.figure() #Figure()
+    figure = plt.figure(facecolor='none') #Figure()
     #figure.patch.set_facecolor('white')
     #plot_canvas = FigureCanvasQTAgg(figure)
 #    image_box.layout().addWidget(plot_canvas)
@@ -457,7 +457,7 @@ def plot_beam(beam2D, show_plot=True, outfilename='', outfileext='png', cut=0, t
             vmin = xz_min_except_0/2.0
 
         obj = ax2D.imshow(xz, norm=LogNorm(vmin=vmin, vmax=vmax), origin='lower', 
-                          aspect='auto', extent=extent, cmap=cmap)
+                          aspect='auto', extent=extent, cmap=cmap,alpha=0)
 
         axX.set_yscale('log')
         axY.set_xscale('log')
